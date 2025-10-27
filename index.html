@@ -3,159 +3,607 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Rafael's Portfolio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <title>Rafael | Frontend Developer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    /* Reset básico */
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    /* CSS Variables */
+    :root {
+      --primary: #3B82F6;
+      --primary-dark: #2563EB;
+      --secondary: #10B981;
+      --dark: #1F2937;
+      --light: #F9FAFB;
+      --gray: #6B7280;
+      --gray-light: #E5E7EB;
+      --transition: all 0.3s ease;
+      --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    }
+
+    /* Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
 
     body {
-      font-family: 'Roboto', sans-serif;
-      background: #f0f2f5;
-      color: #333;
+      font-family: 'Inter', sans-serif;
+      background-color: var(--light);
+      color: var(--dark);
       line-height: 1.6;
+      overflow-x: hidden;
     }
 
-    header {
-      background: linear-gradient(90deg, #4CAF50, #45a049);
-      color: white;
-      text-align: center;
-      padding: 4rem 2rem;
-    }
-
-    header h1 {
-      font-size: 2.5rem;
+    /* Typography */
+    h1, h2, h3, h4 {
+      font-weight: 700;
+      line-height: 1.2;
       margin-bottom: 1rem;
     }
 
-    header p {
-      font-size: 1.2rem;
-      max-width: 600px;
-      margin: 0 auto;
-    }
-
-    section {
-      padding: 4rem 2rem;
-      max-width: 1000px;
-      margin: 0 auto;
+    h1 {
+      font-size: 3.5rem;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
 
     h2 {
-      color: #4CAF50;
-      font-size: 2rem;
+      font-size: 2.5rem;
+      position: relative;
+      display: inline-block;
+      margin-bottom: 3rem;
+    }
+
+    h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 60px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      border-radius: 2px;
+    }
+
+    h3 {
+      font-size: 1.5rem;
+    }
+
+    p {
       margin-bottom: 1.5rem;
+      color: var(--gray);
+    }
+
+    /* Layout */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    section {
+      padding: 6rem 0;
+    }
+
+    section:nth-child(even) {
+      background-color: white;
+    }
+
+    /* Header */
+    header {
+      background: linear-gradient(135deg, #1F2937 0%, #374151 100%);
+      color: white;
+      padding: 8rem 0;
       text-align: center;
+      position: relative;
+      overflow: hidden;
     }
 
-    ul {
-      list-style-type: none;
-      padding-left: 0;
+    header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
     }
 
-    ul li {
-      margin-bottom: 0.8rem;
-      text-align: center;
-      font-size: 1.1rem;
+    .header-content {
+      position: relative;
+      z-index: 1;
     }
 
-    .projects {
+    .header-content p {
+      font-size: 1.25rem;
+      max-width: 600px;
+      margin: 0 auto 2rem;
+      color: var(--gray-light);
+    }
+
+    .profile-img {
+      max-width: 200px;
+      border-radius: 50%;
+      margin: 0 auto 2rem;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
       display: flex;
-      gap: 2rem;
-      flex-wrap: wrap;
+      align-items: center;
       justify-content: center;
+      font-size: 3.5rem;
+      color: white;
     }
 
-    .project {
+    .cta-button {
+      display: inline-block;
+      padding: 0.75rem 2rem;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: var(--transition);
+      box-shadow: var(--shadow);
+    }
+
+    .cta-button:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    /* About Section */
+    .about-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .about-text h2 {
+      margin-bottom: 1.5rem;
+    }
+
+    .skills-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 1rem;
+    }
+
+    .skill-card {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 12px;
+      text-align: center;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+    }
+
+    .skill-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .skill-card i {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+      color: var(--primary);
+    }
+
+    /* Projects Section */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 2rem;
+    }
+
+    .project-card {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+    }
+
+    .project-card:hover {
+      transform: translateY(-10px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .project-img {
+      height: 200px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 3rem;
+    }
+
+    .project-content {
+      padding: 1.5rem;
+    }
+
+    .project-links {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .project-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      background: var(--gray-light);
+      color: var(--dark);
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: var(--transition);
+    }
+
+    .project-link:hover {
+      background: var(--primary);
+      color: white;
+    }
+
+    /* Contact Section */
+    .contact-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+    }
+
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .contact-item i {
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.25rem;
+    }
+
+    .contact-form {
       background: white;
       padding: 2rem;
       border-radius: 12px;
-      flex: 1 1 250px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-      transition: transform 0.3s, box-shadow 0.3s;
+      box-shadow: var(--shadow);
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border: 1px solid var(--gray-light);
+      border-radius: 6px;
+      font-family: 'Inter', sans-serif;
+      transition: var(--transition);
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    }
+
+    .submit-btn {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      border: none;
+      padding: 0.75rem 2rem;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      width: 100%;
+    }
+
+    .submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow);
+    }
+
+    /* Footer */
+    footer {
+      background: var(--dark);
+      color: white;
+      padding: 3rem 0;
       text-align: center;
     }
 
-    .project:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin: 2rem 0;
     }
 
-    .project h3 {
-      margin-bottom: 1rem;
-      color: #333;
-    }
-
-    .project a {
-      display: inline-block;
-      margin-top: 1rem;
-      padding: 0.5rem 1rem;
-      background: #4CAF50;
+    .social-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 50px;
+      height: 50px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
       color: white;
-      border-radius: 6px;
       text-decoration: none;
-      transition: background 0.3s;
+      transition: var(--transition);
     }
 
-    .project a:hover {
-      background: #45a049;
+    .social-link:hover {
+      background: var(--primary);
+      transform: translateY(-3px);
     }
 
-    section:last-child ul li a {
-      color: #4CAF50;
-      transition: color 0.3s;
+    .copyright {
+      color: var(--gray);
+      font-size: 0.9rem;
     }
 
-    section:last-child ul li a:hover {
-      color: #2e7d32;
+    /* Responsive Design */
+    @media (max-width: 992px) {
+      h1 {
+        font-size: 2.5rem;
+      }
+      
+      h2 {
+        font-size: 2rem;
+      }
+      
+      .about-content,
+      .contact-container {
+        grid-template-columns: 1fr;
+      }
     }
 
-    @media(max-width: 768px) {
-      header h1 { font-size: 2rem; }
-      header p { font-size: 1rem; }
-      .projects { gap: 1rem; }
+    @media (max-width: 768px) {
+      section {
+        padding: 4rem 0;
+      }
+      
+      header {
+        padding: 6rem 0;
+      }
+      
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .container {
+        padding: 0 1rem;
+      }
+      
+      h1 {
+        font-size: 2rem;
+      }
+      
     }
   </style>
 </head>
 <body>
 
 <header>
-  <h1>Hi, I'm Rafael 👋</h1>
-  <p>Computer Science student at UFAL | Passionate about development and technology</p>
+  <div class="container">
+    <div class="header-content">
+        <img src="profile.jpg" class="profile-img">
+      <h1>Rafael Bandeira</h1>
+      <p>Computer Science Student at UFAL | Passionate about creating exceptional digital experiences</p>
+      <a href="#contact" class="cta-button">Get In Touch</a>
+    </div>
+  </div>
 </header>
 
-<section>
-  <h2>💻 Technologies I Use</h2>
-  <ul>
-    <li>Python, JavaScript, Java</li>
-    <li>React, Node.js, Tailwind CSS</li>
-    <li>Git, GitHub, VS Code, Linux</li>
-  </ul>
-</section>
-
-<section>
-  <h2>📂 Projects</h2>
-  <div class="projects">
-    <div class="project">
-      <h3>PDF Editor</h3>
-      <p>A simple PDF editor built with Python</p>
-      <a href="https://github.com/IhRafaell/PDF_editor" target="_blank">View Repository</a>
-    </div>
-    <div class="project">
-      <h3>Project2</h3>
-      <p>Description of project 2</p>
-      <a href="#" target="_blank">View Repository</a>
+<section id="about">
+  <div class="container">
+    <h2>About Me</h2>
+    <div class="about-content">
+      <div class="about-text">
+        <p>Hello! I'm Rafael, a Computer Science student at UFAL with a passion for creating beautiful, functional, and user-centered digital experiences. I'm constantly learning and exploring new technologies to expand my skillset.</p>
+        <p>When I'm not coding, you can find me exploring new frameworks, contributing to open source projects, or sharing knowledge with the developer community.</p>
+      </div>
+      <div class="skills-container">
+        <div class="skill-card">
+          <i class="fab fa-js-square"></i>
+          <h3>JavaScript</h3>
+        </div>
+        <div class="skill-card">
+          <i class="fab fa-react"></i>
+          <h3>React</h3>
+        </div>
+        <div class="skill-card">
+          <i class="fab fa-python"></i>
+          <h3>Python</h3>
+        </div>
+        <div class="skill-card">
+          <i class="fab fa-node-js"></i>
+          <h3>Node.js</h3>
+        </div>
+        <div class="skill-card">
+          <i class="fas fa-database"></i>
+          <h3>Database</h3>
+        </div>
+        <div class="skill-card">
+          <i class="fab fa-git-alt"></i>
+          <h3>Git</h3>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<section>
-  <h2>📫 Contact Me</h2>
-  <ul>
-    <li><a href="https://www.linkedin.com/in/your-linkedin" target="_blank">LinkedIn</a></li>
-    <li><a href="mailto:your@email.com">Email</a></li>
-    <li><a href="https://twitter.com/your-twitter" target="_blank">Twitter</a></li>
-  </ul>
+<section id="projects">
+  <div class="container">
+    <h2>My Projects</h2>
+    <div class="projects-grid">
+      <div class="project-card">
+        <div class="project-img">
+          <i class="fas fa-file-pdf"></i>
+        </div>
+        <div class="project-content">
+          <h3>PDF Editor</h3>
+          <p>A powerful PDF editor built with Python that allows users to manipulate PDF documents with ease.</p>
+          <div class="project-links">
+            <a href="https://github.com/IhRafaell/PDF_editor" class="project-link" target="_blank">
+              <i class="fab fa-github"></i> Code
+            </a>
+            <a href="#" class="project-link">
+              <i class="fas fa-external-link-alt"></i> Live Demo
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="project-card">
+        <div class="project-img">
+          <i class="fas fa-shopping-cart"></i>
+        </div>
+        <!-- <div class="project-content">
+          <h3>E-Commerce Platform</h3>
+          <p>A full-stack e-commerce solution with React frontend and Node.js backend, featuring payment integration.</p>
+          <div class="project-links">
+            <a href="#" class="project-link">
+              <i class="fab fa-github"></i> Code
+            </a>
+            <a href="#" class="project-link">
+              <i class="fas fa-external-link-alt"></i> Live Demo
+            </a>
+          </div>
+        </div> -->
+      </div>
+      <div class="project-card">
+        <div class="project-img">
+          <i class="fas fa-mobile-alt"></i>
+        </div>
+        <!-- <div class="project-content">
+          <h3>Task Management App</h3>
+          <p>A responsive task management application with drag-and-drop functionality and real-time updates.</p>
+          <div class="project-links">
+            <a href="#" class="project-link">
+              <i class="fab fa-github"></i> Code
+            </a>
+            <a href="#" class="project-link">
+              <i class="fas fa-external-link-alt"></i> Live Demo
+            </a>
+          </div>
+        </div> -->
+      </div>
+    </div>
+  </div>
 </section>
+
+<section id="contact">
+  <div class="container">
+    <h2>Get In Touch</h2>
+    <div class="contact-container">
+      <div class="contact-info">
+        <div class="contact-item">
+          <i class="fas fa-envelope"></i>
+          <div>
+            <h3>Email</h3>
+            <p>ihrafaelluiz@gmail.com</p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <i class="fas fa-map-marker-alt"></i>
+          <div>
+            <h3>Location</h3>
+            <p>Maceió, AL, Brazil</p>
+          </div>
+        </div>
+        <!-- <div class="contact-item">
+          <i class="fas fa-phone"></i>
+          <div>
+            <h3>Phone</h3>
+            <p>+55 (82) 99999-9999</p>
+          </div>
+        </div> -->
+      </div>
+      <div class="contact-form">
+        <form id="contactForm">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" required>
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" required>
+          </div>
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" rows="5" required></textarea>
+          </div>
+          <button type="submit" class="submit-btn">Send Message</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <h3>Rafael Bandeira</h3>
+    <p>Student and Technology Enthusiast</p>
+    <div class="social-links">
+      <a href="#" class="social-link">
+        <i class="fab fa-linkedin-in"></i>
+      </a>
+      <a href="#" class="social-link">
+        <i class="fab fa-github"></i>
+      </a>
+      <a href="#" class="social-link">
+        <i class="fab fa-twitter"></i>
+      </a>
+      <a href="#" class="social-link">
+        <i class="fab fa-instagram"></i>
+      </a>
+    </div>
+    <p class="copyright">© 2025 Rafael Bandeira. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+  // Simple form submission handler
+  document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    alert('Thank you for your message! I will get back to you soon.');
+    this.reset();
+  });
+</script>
 
 </body>
 </html>
