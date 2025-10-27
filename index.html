@@ -222,7 +222,7 @@
 <script>
   // Inicializar EmailJS
   // Substitua 'YOUR_PUBLIC_KEY' pela sua chave pública do EmailJS
-  emailjs.init('YOUR_PUBLIC_KEY');
+  emailjs.init('5y2fLuPpNpWEpMUnx');
   
   document.getElementById('contactForm').addEventListener('submit', function(e) {
     e.preventDefault();
@@ -236,7 +236,7 @@
     
     // Enviar email usando EmailJS
     // Substitua 'YOUR_SERVICE_ID' e 'YOUR_TEMPLATE_ID' pelos seus IDs
-    emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', this)
+    emailjs.sendForm('service_jgkjp33', 'template_gbis88e', this)
       .then(function() {
         alert('Thank you for your message! I will get back to you soon.');
         document.getElementById('contactForm').reset();
