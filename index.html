@@ -165,6 +165,45 @@
       </div>
     </div>
   </div>
+<section id="contact">
+  <div class="container">
+    <h2>Get In Touch</h2>
+    <div class="contact-container">
+      <div class="contact-info">
+        <div class="contact-item">
+          <i class="fas fa-envelope"></i>
+          <div>
+            <h3>Email</h3>
+            <p>ihrafaelluiz@gmail.com</p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <i class="fas fa-map-marker-alt"></i>
+          <div>
+            <h3>Location</h3>
+            <p>Maceió, AL, Brazil</p>
+          </div>
+        </div>
+      </div>
+      <div class="contact-form">
+        <form id="contactForm">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" required>
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+          </div>
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="5" required></textarea>
+          </div>
+          <button type="submit" class="submit-btn" id="submitBtn">Send Message</button>
+        </form>
+      </div>
+    </div>
+  </div>
 </section>
 
 <footer>
@@ -175,28 +214,40 @@
       <a href="https://www.linkedin.com/in/rafael-bandeiraa" class="social-link">
         <i class="fab fa-linkedin-in"></i>
       </a>
-      <!-- <a href="#" class="social-link">
-        <i class="fab fa-github"></i>
-      </a>
-      <a href="#" class="social-link">
-        <i class="fab fa-twitter"></i>
-      </a>
-      <a href="#" class="social-link">
-        <i class="fab fa-instagram"></i>
-      </a> -->
     </div>
     <p class="copyright">© 2025 Rafael Bandeira. All rights reserved.</p>
   </div>
 </footer>
 
 <script>
-  // Simple form submission handler
+  // Inicializar EmailJS
+  // Substitua 'YOUR_PUBLIC_KEY' pela sua chave pública do EmailJS
+  emailjs.init('YOUR_PUBLIC_KEY');
+  
   document.getElementById('contactForm').addEventListener('submit', function(e) {
     e.preventDefault();
-    alert('Thank you for your message! I will get back to you soon.');
-    this.reset();
+    
+    const submitBtn = document.getElementById('submitBtn');
+    const originalText = submitBtn.textContent;
+    
+    // Mostrar estado de carregamento
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending...';
+    
+    // Enviar email usando EmailJS
+    // Substitua 'YOUR_SERVICE_ID' e 'YOUR_TEMPLATE_ID' pelos seus IDs
+    emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', this)
+      .then(function() {
+        alert('Thank you for your message! I will get back to you soon.');
+        document.getElementById('contactForm').reset();
+      }, function(error) {
+        alert('Failed to send message. Please try again or contact me directly at ihrafaelluiz@gmail.com');
+        console.error('EmailJS Error:', error);
+      })
+      .finally(function() {
+        // Restaurar botão
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalText;
+      });
   });
 </script>
-
-</body>
-</html>
